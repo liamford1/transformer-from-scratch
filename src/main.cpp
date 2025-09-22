@@ -90,7 +90,22 @@ int main() {
     Tensor soft_result = s.softmax();
     std::cout << "\nAfter softmax:" << std::endl;
     soft_result.display();
+
+    Tensor w(2, 2);
+    w.fill(7.5f);
+    w.display();  // Should show all 7.5s
     
+    // Test scale
+    Tensor tt(2, 2);
+    tt.setValue(0, 0, 2); tt.setValue(0, 1, 4);
+    tt.setValue(1, 0, 6); tt.setValue(1, 1, 8);
+
+    std::cout << "Original:" << std::endl;
+    tt.display();
+
+    Tensor scaled = tt.scale(0.5f);
+    std::cout << "Scaled by 0.5:" << std::endl;
+    scaled.display();
     return 0;
 }
 

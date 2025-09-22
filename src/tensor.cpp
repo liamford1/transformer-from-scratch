@@ -143,3 +143,21 @@ Tensor Tensor::softmax() const {
 
     return result;
 }
+
+void Tensor::fill(float value) {
+    for (int i = 0; i < this->rows * this->cols; i++) {
+       data[i] = value;
+    }
+}
+
+Tensor Tensor::scale(float scaler) const {
+    Tensor result(this->rows, this->cols);
+
+    for (int i = 0; i < this->rows; i++) {
+        for (int j = 0; j < this->cols; j++) {
+            result.setValue(i, j, this->getValue(i ,j) * scaler);
+        }
+    }
+
+    return result;
+}
