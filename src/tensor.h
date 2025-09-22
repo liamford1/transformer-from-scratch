@@ -11,9 +11,9 @@ class Tensor {
 
         ~Tensor();
 
-        float getValue(int row, int col);
+        float getValue(int row, int col) const;
         void setValue(int row, int col, float value);
-        void display();
+        void display() const;
 
         Tensor matmul(const Tensor& other) const;
         Tensor add(const Tensor& other) const;
