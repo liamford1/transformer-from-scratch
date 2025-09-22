@@ -60,6 +60,36 @@ int main() {
     Tensor transposed = t.transpose();
     std::cout << "\nTransposed (3x2):" << std::endl;
     transposed.display();
+
+    // Test ReLU
+    std::cout << "\n=== Testing ReLU ===" << std::endl;
+    Tensor r(2, 3);
+
+    // Fill with mix of positive and negative values
+    r.setValue(0, 0, 2.5f);  r.setValue(0, 1, -1.2f); r.setValue(0, 2, 0.0f);
+    r.setValue(1, 0, -3.7f); r.setValue(1, 1, 5.1f);  r.setValue(1, 2, -0.5f);
+
+    std::cout << "Before ReLU:" << std::endl;
+    r.display();
+
+    Tensor relu_result = r.relu();
+    std::cout << "\nAfter ReLU:" << std::endl;
+    relu_result.display();
+
+    // Test softmax
+    std::cout << "\n=== Testing Softmax ===" << std::endl;
+    Tensor s(2, 3);
+
+    // Fill with some values
+    s.setValue(0, 0, 0.0f); s.setValue(0, 1, 1.0f); s.setValue(0, 2, 0.0f);  // Should favor middle
+    s.setValue(1, 0, 5.0f); s.setValue(1, 1, 1.0f); s.setValue(1, 2, 1.0f);  // Should favor first
+
+    std::cout << "Before softmax:" << std::endl;
+    s.display();
+
+    Tensor soft_result = s.softmax();
+    std::cout << "\nAfter softmax:" << std::endl;
+    soft_result.display();
     
     return 0;
 }

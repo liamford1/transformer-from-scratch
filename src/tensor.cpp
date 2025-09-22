@@ -1,5 +1,7 @@
 #include "tensor.h"
 #include <iostream>
+#include <algorithm>
+#include <cmath>
 
 Tensor::Tensor(int rows, int cols) {
     this->rows = rows;
@@ -106,6 +108,36 @@ Tensor Tensor::transpose() const {
     for (int i = 0; i < this->rows; i++) {
         for (int j = 0; j < this->cols; j++) {
             result.setValue(j, i, this->getValue(i, j));
+        }
+    }
+
+    return result;
+}
+
+Tensor Tensor::relu() const {
+    Tensor result(this->rows, this->cols);
+
+    for (int i = 0; i < this->rows; i++) {
+        for (int j = 0; j < this->cols; j++) {
+            result.setValue(i, j, std::max(0.0f, this->getValue(i, j)));
+        }
+    }
+
+    return result;
+}
+
+Tensor Tensor::softmax() const {
+    Tensor result(this->rows, this->cols);
+    
+    for (int i = 0; i < this->rows; i++) {
+        float sum = 0.0f;
+
+        for (int j = 0; j < this->cols; j++) {
+            sum += exp(getValue(i, j));
+        }
+
+        for (int j = 0; j < this->cols; j++) {
+            result.setValue(i, j, exp(getValue(i, j)) / sum);
         }
     }
 
