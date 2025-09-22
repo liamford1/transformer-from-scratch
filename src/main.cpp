@@ -45,6 +45,21 @@ int main() {
     std::cout << "\nX + Y:" << std::endl;
     Tensor sum = x.add(y);
     sum.display();
+
+    // Test transpose
+    std::cout << "\n=== Testing Transpose ===" << std::endl;
+    Tensor t(2, 3);  // 2x3 matrix
+
+    // Fill with simple values
+    t.setValue(0, 0, 1); t.setValue(0, 1, 2); t.setValue(0, 2, 3);
+    t.setValue(1, 0, 4); t.setValue(1, 1, 5); t.setValue(1, 2, 6);
+
+    std::cout << "Original (2x3):" << std::endl;
+    t.display();
+
+    Tensor transposed = t.transpose();
+    std::cout << "\nTransposed (3x2):" << std::endl;
+    transposed.display();
     
     return 0;
 }

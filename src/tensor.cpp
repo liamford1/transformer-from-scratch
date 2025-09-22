@@ -84,3 +84,30 @@ Tensor Tensor::subtract(const Tensor& other) const {
     return result;
 }
 
+Tensor Tensor::elementwise(const Tensor& other) const {
+    if (this->rows != other.rows || this->cols != other.cols) {
+        throw std::invalid_argument("Matrix dimensions do not match for elementwise multiply");
+    }
+
+    Tensor result(this->rows, this->cols);
+
+    for (int i = 0; i < this->rows; i++) {
+        for (int j = 0; j < this->cols; j++) {
+            result.setValue(i, j, this->getValue(i, j) * other.getValue(i, j));
+        }
+    }
+
+    return result;
+}
+
+Tensor Tensor::transpose() const {
+    Tensor result(this->cols, this->rows);
+
+    for (int i = 0; i < this->rows; i++) {
+        for (int j = 0; j < this->cols; j++) {
+            result.setValue(j, i, this->getValue(i, j));
+        }
+    }
+
+    return result;
+}
